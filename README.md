@@ -58,7 +58,7 @@ The `kunjani` MCP server exposes exactly two tools:
 The `kunjani` MCP server is a resource server with no identity of its own: your
 bearer token is forwarded verbatim to the Kunjani API, and it only ever touches
 data your account is already authorized to see. See the
-[Kunjani privacy policy](https://www.kunjani.co/privacy) for what data is
+[Kunjani privacy policy](https://kunjani.ai/privacy-policy) for what data is
 processed, why, retention, and your controls.
 
 ## Links
