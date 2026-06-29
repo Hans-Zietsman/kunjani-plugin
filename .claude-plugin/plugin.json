@@ -1,0 +1,22 @@
+{
+  "name": "kunjani-agent-k",
+  "version": "1.0.0",
+  "description": "Agent K for Kunjani: an instructional-design skill that designs learning outcomes and writes gamified training activities, plus the hosted Kunjani MCP server to publish them straight into a Kunjani deck on the WhatsApp-based learning platform.",
+  "author": {
+    "name": "Hans Zietsman",
+    "email": "admin@kunjani.co",
+    "url": "https://www.kunjani.co/"
+  },
+  "homepage": "https://github.com/Hans-Zietsman/kunjani-plugin",
+  "repository": "https://github.com/Hans-Zietsman/kunjani-plugin",
+  "license": "MIT",
+  "keywords": [
+    "kunjani",
+    "instructional-design",
+    "elearning",
+    "training",
+    "whatsapp",
+    "gamification",
+    "mcp"
+  ]
+}
