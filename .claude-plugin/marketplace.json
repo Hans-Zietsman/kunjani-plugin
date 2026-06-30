@@ -1,0 +1,25 @@
+{
+  "name": "kunjani",
+  "owner": {
+    "name": "Hans Zietsman",
+    "email": "admin@kunjani.co",
+    "url": "https://www.kunjani.co/"
+  },
+  "metadata": {
+    "description": "Kunjani plugins for designing and publishing gamified WhatsApp training.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "kunjani-agent-k",
+      "description": "Agent Kunjani: instructional-design skill plus the hosted Kunjani MCP server to design and publish gamified WhatsApp training decks.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Hans Zietsman",
+        "email": "admin@kunjani.co",
+        "url": "https://www.kunjani.co/"
+      },
+      "source": "./"
+    }
+  ]
+}
