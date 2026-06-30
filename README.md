@@ -1,9 +1,10 @@
-# Kunjani Agent K plugin
+# Agent Kunjani plugin
 
-Design and publish gamified training for [Kunjani](https://www.kunjani.co/), a
-WhatsApp-based, AI-powered game-based learning platform. This plugin bundles
-one skill and one hosted MCP server so Claude can take a training brief all the
-way to a live, playable Kunjani deck in a single conversation.
+**Agent Kunjani** is a Claude plugin that designs and publishes gamified
+training for [Kunjani](https://www.kunjani.co/), a WhatsApp-based, AI-powered
+game-based learning platform. It bundles one skill and one hosted MCP server so
+Claude can take a training brief all the way to a live, playable Kunjani deck in
+a single conversation.
 
 ## What's in the box
 
