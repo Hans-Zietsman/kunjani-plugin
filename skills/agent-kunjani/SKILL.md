@@ -65,7 +65,7 @@ You are an instructional designer creating activities for **Kunjani**, a WhatsAp
 
 ## Why output quality matters
 
-Every activity you create has three parts: the **Activity** (what the player sees), the **Suggested Response** (what the AI grader uses as the answer key), and the **Assessment Notes** (grading rules and context for the AI grader). The AI grader returns a numeric level (1 to the suit's category count, typically 1-5) based on how well the player's response matches the Suggested Response, interpreted through the Assessment Notes. Kunjani converts that number to a named tier at the player-facing layer using the default ladder: **Beginner → Developing → Competent → Master → Teacher**. If the Suggested Response is vague, grading is inconsistent. If Assessment Notes are missing, the grader has no flexibility rules and will mark reasonable answers as wrong.
+Every activity you create has three parts: the **Activity** (what the player sees), the **Suggested Response** (the model answer, used as the grader's answer key and also sent back to the player over WhatsApp or Teams after they submit), and the **Assessment Notes** (grading rules and context, seen only by the grader). Because the Suggested Response lands on the player's screen, keep it lean and scannable, just the core points; push nuance, exceptions, and grading tolerances into the Assessment Notes, which the player never sees. The AI grader returns a numeric level (1 to the suit's category count, typically 1-5) based on how well the player's response matches the Suggested Response, interpreted through the Assessment Notes. Kunjani converts that number to a named tier at the player-facing layer using the default ladder: **Beginner → Developing → Competent → Master → Teacher**. If the Suggested Response is vague, grading is inconsistent. If Assessment Notes are missing, the grader has no flexibility rules and will mark reasonable answers as wrong.
 
 ## Language behavior
 
@@ -379,17 +379,19 @@ Every finalized activity has exactly three code blocks. No headings or suit name
 - WhatsApp-safe formatting only: short lines, simple bullets (•), emojis (✅ ☑ ☐ →)
 - Keep language at the target audience's reading level
 
-### Code block 2: Suggested Response (the AI grader's answer key)
+### Code block 2: Suggested Response (model answer: the grader's key, and shown to the player)
 
 ```
 [Expected answer content here]
 ```
 
+This block is player-facing. After the player submits, Kunjani sends the Suggested Response back to them over WhatsApp or Teams as the model answer, so keep it lean and scannable. State the core points a correct answer hits and stop there. Detail, caveats, alternative acceptable answers, and grading tolerances belong in the Assessment Notes (below), which the player never sees.
+
 - Use simple bullets (•) only
-- Cover the key points a correct response should include
-- Be specific enough that the AI grader can distinguish good from poor answers
+- Hit the key points a correct answer must contain, then stop; don't pad with nuance or edge cases
+- Specific enough for the grader to tell strong answers from weak, lean enough not to crowd the player's screen
 - Use **Unicode Mathematical Bold** where it aids clarity
-- Keep concise but non-ambiguous — the grader uses this as ground truth
+- If a point is really a grading rule or an exception, move it to the Assessment Notes rather than listing it here
 
 Immediately below this code block, add:
 **Time Limit: XX seconds**
@@ -407,7 +409,7 @@ Below the third code block, list the outcome(s) this activity advances using the
 
 (Multiple outcomes? Comma-separate them. Match the description text exactly — that's what the API uses to attach the outcome.)
 
-Every activity needs this block. Include:
+The Assessment Notes are seen only by the grader, never by the player, so this is where all the detail lives: the nuance, exceptions, and tolerances you deliberately kept out of the Suggested Response. Every activity needs this block. Include:
 
 **Grading Guidance** — Tell the AI grader how to interpret responses:
 - Accept answers that include relevant points even if not word-for-word
@@ -416,6 +418,7 @@ Every activity needs this block. Include:
 - Specify if only a letter, number, or short answer is expected
 - Specify minimum required valid points (e.g., "3 out of 5 listed")
 - For photo/video activities: describe what constitutes a valid submission
+- List acceptable alternative answers and exceptions you kept out of the Suggested Response
 
 **Extra Context** — Give the grader information it wouldn't otherwise have:
 - Transcript or summary of any audio, video, or story referenced in the activity
@@ -518,7 +521,7 @@ If the user explicitly chooses **auto-build mode** ("generate the full deck in o
 - `suit` — Jolt / Advance / Mystery / Oops / Explain / Demonstrate. Case-insensitive. Server resolves the suit by name on the deck.
 - `name` — optional. Kunjani auto-numbers (J1, A1, …) within the suit if you omit it. Pass an explicit name only when you need a specific slot.
 - `text` — Code block 1 (activity text the player sees).
-- `answer` — Code block 2 (suggested response / answer key).
+- `answer` — Code block 2 (suggested response / model answer; shown to the player after they submit).
 - `assessment_notes` — Code block 3 (grading + extra context). **When you attach media to the question, the Extra Context block MUST describe it (image description or audio transcript), because the grader may not receive the attached file. This is about outgoing prompt media only. Player-submitted voice, photo, and video are delivered to the grader and assessed directly.**
 - `time_in_seconds` — your proposed time limit.
 - `picture` — optional **absolute** path to a media file. The CLI uploads it as multipart on push. Accepted MIME types: JPEG / PNG / GIF / WEBP / SVG / BMP / TIFF for images; MP3 / MP4 / WAV / OGG / Opus / WebM for audio/video; PDF. 16 MB max per file.
