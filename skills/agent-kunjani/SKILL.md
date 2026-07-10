@@ -519,7 +519,7 @@ If the user explicitly chooses **auto-build mode** ("generate the full deck in o
 - `name` — optional. Kunjani auto-numbers (J1, A1, …) within the suit if you omit it. Pass an explicit name only when you need a specific slot.
 - `text` — Code block 1 (activity text the player sees).
 - `answer` — Code block 2 (suggested response / answer key).
-- `assessment_notes` — Code block 3 (grading + extra context). **When media is attached, the Extra Context block MUST include the image description / audio transcript — the grader is text-only.**
+- `assessment_notes` — Code block 3 (grading + extra context). **When you attach media to the question, the Extra Context block MUST describe it (image description or audio transcript), because the grader may not receive the attached file. This is about outgoing prompt media only. Player-submitted voice, photo, and video are delivered to the grader and assessed directly.**
 - `time_in_seconds` — your proposed time limit.
 - `picture` — optional **absolute** path to a media file. The CLI uploads it as multipart on push. Accepted MIME types: JPEG / PNG / GIF / WEBP / SVG / BMP / TIFF for images; MP3 / MP4 / WAV / OGG / Opus / WebM for audio/video; PDF. 16 MB max per file.
 - `facilitator_picture` — same constraints as `picture`. Image (or other media) shown to the facilitator post-game, not the player.
@@ -585,7 +585,7 @@ Activity text should be playful, supportive, and educational. Celebrate creativi
 
 When an activity uses media (audio, image, video, NotebookLM artifact), apply these rules from `agent-k-enhance`:
 
-- **Transcript-in-grader is mandatory.** The Kunjani AI grader is text-only. Whenever media is attached, the Extra Context block in Assessment Notes must include enough textual description for the grader to verify the player's response — full audio transcript, image description with key cues, video transcript with key moments. Skip this and the grader marks valid responses wrong.
+- **Describe outgoing question media in the grader notes.** This applies to media you attach to the **question**, not the player's answer. The grader may not receive a file attached to the prompt, so the Extra Context block in Assessment Notes must describe what it contains: full transcript for attached audio, key cues for an attached image, key moments for an attached video. Skip this and the grader judges the answer blind to the prompt. Player-submitted voice, photo, and video are sent to the grader and assessed directly, tone and emotion included. Never replace a player's answer with a transcript.
 - **Outgoing prompt media is capped at 16MB** (image, audio, video). Player submissions have no cap.
 - **Use the naming convention** from `agent-k-enhance`: `Activity_{LO}_{Suit}{N}_{purpose}.{ext}`.
 - **Defer to `agent-k-enhance`** for provider selection, best-practice prompting (brand-language-strict for images, accent steering for audio), and invocation via the helper CLIs.
