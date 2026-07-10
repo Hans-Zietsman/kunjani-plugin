@@ -10,23 +10,34 @@ a single conversation.
 
 | Component | Type | What it does |
 |---|---|---|
-| `agent-k` | Skill | Instructional-design methodology: interviews you for a brief, designs 3-6 learning outcomes, and writes Kunjani activities across the six Suits (Jolt, Advance, Mystery, Oops, Explain, Demonstrate) with a three-block structure (Activity / Suggested Response / Assessment Notes) tuned for Kunjani's AI grader. |
-| `kunjani` | MCP server (remote, hosted) | The hosted Kunjani MCP at `https://play.kunjani.co/api/v1/mcp`. Exposes two tools that publish what `agent-k` designs straight into your Kunjani account. |
+| `agent-kunjani` | Skill | Instructional-design methodology: interviews you for a brief, designs 3-6 learning outcomes, and writes Kunjani activities across the six Suits (Jolt, Advance, Mystery, Oops, Explain, Demonstrate) with a three-block structure (Activity / Suggested Response / Assessment Notes) tuned for Kunjani's AI grader. |
+| `kunjani` | MCP server (remote, hosted) | The hosted Kunjani MCP at `https://play.kunjani.co/api/v1/mcp`. Exposes five tools that publish what `agent-kunjani` designs straight into your Kunjani account. |
 
 ### MCP tools
 
-The `kunjani` MCP server exposes exactly two tools:
+The `kunjani` MCP server exposes five tools:
 
-- **`publish_activity_batch`** — Create or update a deck and publish a batch of
+- **`publish_activity_batch`**: create or update a deck and publish a batch of
   activities into it in one call. This single tool covers the whole build
   (deck + outcomes + activities). Call it with `mode: "publish"` to persist, or
   `mode: "validate"` for a dry run that writes nothing. Input is a structured
   `deck` object plus an `activities` array (and an optional top-level
-  `outcomes` array). See the JSON field reference inside the `agent-k`
+  `outcomes` array). See the JSON field reference inside the `agent-kunjani`
   `SKILL.md`.
-- **`list_decks`** — List the decks you can see, to find an existing deck's `id`
+- **`list_decks`**: list the decks you can see, to find an existing deck's `id`
   and pass it back to `publish_activity_batch` for an idempotent update instead
   of creating a duplicate.
+- **`manage_deck`**: get, create, update, delete, or reorder the questions of a
+  single deck. `create` makes an empty deck; `update` edits deck fields and the
+  URL-based thumbnail.
+- **`manage_questions`**: list, get, create, update, or delete individual
+  activities for targeted edits without republishing a whole batch. Deleting a
+  question removes it from every deck it is shared with.
+- **`manage_outcomes`**: list, create, update, or delete a deck's learning
+  outcomes, including re-wiring which questions each outcome links to.
+
+Deletes on `manage_deck` and `manage_questions` are two-step: the first call
+returns a short-lived confirm token that the second must echo.
 
 ## How to use it
 
@@ -36,8 +47,8 @@ The `kunjani` MCP server exposes exactly two tools:
    API token is also accepted as a bearer token.
 2. **Invoke the skill** — start a conversation with a training goal, e.g.
    *"Build me a Kunjani deck to train retail floor staff on handling unhappy
-   customers."* The `agent-k` skill triggers on this kind of request (and on
-   mentions of Kunjani Suits, deck activities, or `@Agent K`). It will walk you
+   customers."* The `agent-kunjani` skill triggers on this kind of request (and on
+   mentions of Kunjani Suits, deck activities, or `@Agent Kunjani`). It will walk you
    through a brief, propose learning outcomes for your approval, then draft
    activities.
 3. **Publish** — when you approve the activities, Claude calls
