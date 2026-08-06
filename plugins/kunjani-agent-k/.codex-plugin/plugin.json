@@ -1,0 +1,47 @@
+{
+  "name": "kunjani-agent-k",
+  "version": "1.1.1",
+  "description": "Design and publish gamified training decks on Kunjani with an instructional-design skill and the hosted Kunjani MCP server.",
+  "author": {
+    "name": "Kunjani",
+    "email": "admin@kunjani.co",
+    "url": "https://kunjani.ai"
+  },
+  "homepage": "https://kunjani.ai/docs/agent-k/connect-kunjani-to-chatgpt-and-codex",
+  "repository": "https://github.com/Hans-Zietsman/kunjani-plugin",
+  "license": "MIT",
+  "keywords": [
+    "kunjani",
+    "instructional-design",
+    "learning",
+    "training",
+    "whatsapp",
+    "gamification"
+  ],
+  "skills": "./skills/",
+  "apps": "./.app.json",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Agent Kunjani",
+    "shortDescription": "Design and publish Kunjani training decks",
+    "longDescription": "Turn a training brief or source material into learning outcomes and gamified activities, validate the complete deck, and publish it directly to the authenticated Kunjani account.",
+    "developerName": "Kunjani",
+    "category": "Education & Research",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://kunjani.ai",
+    "privacyPolicyURL": "https://kunjani.ai/privacy-policy",
+    "termsOfServiceURL": "https://kunjani.ai/terms-and-conditions",
+    "defaultPrompt": [
+      "Create a Kunjani training deck from my brief or source material.",
+      "Improve the learning outcomes and activities in an existing Kunjani deck.",
+      "Validate this Kunjani deck and publish it after I approve the final activities."
+    ],
+    "brandColor": "#DDDC00",
+    "composerIcon": "./assets/agent-kunjani.png",
+    "logo": "./assets/agent-kunjani.png",
+    "screenshots": []
+  }
+}

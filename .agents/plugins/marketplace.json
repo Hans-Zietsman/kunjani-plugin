@@ -1,0 +1,20 @@
+{
+  "name": "kunjani",
+  "interface": {
+    "displayName": "Kunjani Plugins"
+  },
+  "plugins": [
+    {
+      "name": "kunjani-agent-k",
+      "source": {
+        "source": "local",
+        "path": "./plugins/kunjani-agent-k"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Education & Research"
+    }
+  ]
+}

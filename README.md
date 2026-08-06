@@ -1,80 +1,74 @@
 # Agent Kunjani plugin
 
-**Agent Kunjani** is a Claude plugin that designs and publishes gamified
-training for [Kunjani](https://www.kunjani.co/), a WhatsApp-based, AI-powered
-game-based learning platform. It bundles one skill and one hosted MCP server so
-Claude can take a training brief all the way to a live, playable Kunjani deck in
-a single conversation.
+**Agent Kunjani** is one installable plugin for ChatGPT, Codex, and Claude. It packages the Agent Kunjani instructional-design skill together with the hosted Kunjani MCP connection.
 
-## What's in the box
+Installing the plugin installs both parts. Users do not need to upload a skill and add a connector separately. The only follow-up is signing in to Kunjani when the plugin first needs account access.
 
-| Component | Type | What it does |
+## What the package contains
+
+| Component | Type | Purpose |
 |---|---|---|
-| `agent-kunjani` | Skill | Instructional-design methodology: interviews you for a brief, designs 3-6 learning outcomes, and writes Kunjani activities across the six Suits (Jolt, Advance, Mystery, Oops, Explain, Demonstrate) with a three-block structure (Activity / Suggested Response / Assessment Notes) tuned for Kunjani's AI grader. |
-| `kunjani` | MCP server (remote, hosted) | The hosted Kunjani MCP at `https://play.kunjani.co/api/v1/mcp`. Exposes five tools that publish what `agent-kunjani` designs straight into your Kunjani account. |
+| `agent-kunjani` | Skill | Turns a training brief or source material into learning outcomes and gamified Kunjani activities. |
+| `kunjani` | Hosted MCP server | Reads, validates, creates, and updates decks in the authenticated Kunjani account. |
 
-### MCP tools
+The package is in [`plugins/kunjani-agent-k`](plugins/kunjani-agent-k). It includes:
 
-The `kunjani` MCP server exposes five tools:
+- `.codex-plugin/plugin.json` for ChatGPT and Codex
+- `.claude-plugin/plugin.json` for Claude
+- `.app.json` for the registered ChatGPT integration
+- `.mcp.json` for the hosted MCP endpoint
+- `skills/agent-kunjani/` for the Agent Kunjani skill
 
-- **`publish_activity_batch`**: create or update a deck and publish a batch of
-  activities into it in one call. This single tool covers the whole build
-  (deck + outcomes + activities). Call it with `mode: "publish"` to persist, or
-  `mode: "validate"` for a dry run that writes nothing. Input is a structured
-  `deck` object plus an `activities` array (and an optional top-level
-  `outcomes` array). See the JSON field reference inside the `agent-kunjani`
-  `SKILL.md`.
-- **`list_decks`**: list the decks you can see, to find an existing deck's `id`
-  and pass it back to `publish_activity_batch` for an idempotent update instead
-  of creating a duplicate.
-- **`manage_deck`**: get, create, update, delete, or reorder the questions of a
-  single deck. `create` makes an empty deck; `update` edits deck fields and the
-  URL-based thumbnail.
-- **`manage_questions`**: list, get, create, update, or delete individual
-  activities for targeted edits without republishing a whole batch. Deleting a
-  question removes it from every deck it is shared with.
-- **`manage_outcomes`**: list, create, update, or delete a deck's learning
-  outcomes, including re-wiring which questions each outcome links to.
+## Install
 
-Deletes on `manage_deck` and `manage_questions` are two-step: the first call
-returns a short-lived confirm token that the second must echo.
+### ChatGPT and Codex
 
-## How to use it
+During private testing, add this repository as a plugin marketplace, then install **Agent Kunjani** from the Kunjani Plugins source:
 
-1. **Connect the server** — see [SETUP.md](SETUP.md). The server authenticates
-   with OAuth 2.1 (Authorization Code + PKCE); your client discovers the auth
-   server automatically and opens a browser sign-in. A legacy `knj_` personal
-   API token is also accepted as a bearer token.
-2. **Invoke the skill** — start a conversation with a training goal, e.g.
-   *"Build me a Kunjani deck to train retail floor staff on handling unhappy
-   customers."* The `agent-kunjani` skill triggers on this kind of request (and on
-   mentions of Kunjani Suits, deck activities, or `@Agent Kunjani`). It will walk you
-   through a brief, propose learning outcomes for your approval, then draft
-   activities.
-3. **Publish** — when you approve the activities, Claude calls
-   `publish_activity_batch` to create the deck and push them. It reports the
-   deck URL (`https://play.kunjani.co/decks/<id>`) so you can open and play it.
+```bash
+codex plugin marketplace add Hans-Zietsman/kunjani-plugin
+codex plugin add kunjani-agent-k@kunjani
+```
 
-## Scope and boundaries
+After OpenAI approves and publishes the public listing, users will install **Agent Kunjani** directly from the universal Plugins Directory in ChatGPT or Codex. That public installation includes both the skill and the Kunjani connection.
 
-- **One job, end to end:** brief → outcomes → activities → published deck.
-- **Media is URL-only over MCP.** This plugin does not bundle Kunjani's
-  media-generation tooling (`agent-k-enhance`). Activities can reference media
-  by hosted URL (`picture_url`), but file uploads and audio/image generation
-  happen in the Kunjani deck-builder UI, not through this plugin.
-- **You need a Kunjani account.** The tools act on your own decks under your own
-  authorization; the same permissions that apply in the Kunjani app apply here.
+### Claude
 
-## Privacy
+Add this repository as a marketplace and install the package:
 
-The `kunjani` MCP server is a resource server with no identity of its own: your
-bearer token is forwarded verbatim to the Kunjani API, and it only ever touches
-data your account is already authorized to see. See the
-[Kunjani privacy policy](https://kunjani.ai/privacy-policy) for what data is
-processed, why, retention, and your controls.
+```text
+/plugin marketplace add Hans-Zietsman/kunjani-plugin
+/plugin install kunjani-agent-k@kunjani
+```
+
+Claude also receives the skill and MCP connection from the same plugin package.
+
+## First use
+
+Ask Agent Kunjani to list your decks or create a new training deck. The plugin opens the Kunjani OAuth sign-in flow the first time it needs account access. Sign in and approve access. This is authentication, not a second installation.
+
+See [SETUP.md](SETUP.md) for authentication details and the manual token fallback.
+
+## Available tools
+
+- `publish_activity_batch`: validate or publish a complete deck with outcomes and activities
+- `list_decks`: list decks visible to the authenticated user
+- `get_deck`, `create_deck`, `update_deck`, `reorder_deck_questions`, and `delete_deck`
+- `list_questions`, `get_question`, `create_question`, `update_question`, and `delete_question`
+- `list_outcomes`, `create_outcome`, `update_outcome`, and `delete_outcome`
+
+The advertised delete tools delete immediately. The plugin must ask for explicit confirmation before calling one.
+
+## Scope
+
+- One workflow from brief to outcomes, activities, validation, and publication
+- Hosted HTTPS media URLs only over MCP
+- Access limited to decks available to the authenticated Kunjani account
+- No local service or command-line tool required
 
 ## Links
 
-- Kunjani: https://www.kunjani.co/
-- MCP server source and docs live in the Kunjani application repository.
-- Issues for this plugin: https://github.com/Hans-Zietsman/kunjani-plugin/issues
+- [Kunjani](https://kunjani.ai)
+- [Kunjani privacy policy](https://kunjani.ai/privacy-policy)
+- [Kunjani terms and conditions](https://kunjani.ai/terms-and-conditions)
+- [Report an issue](https://github.com/Hans-Zietsman/kunjani-plugin/issues)

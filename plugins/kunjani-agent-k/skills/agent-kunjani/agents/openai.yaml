@@ -1,0 +1,16 @@
+interface:
+  display_name: "Agent Kunjani"
+  short_description: "Design and publish Kunjani training decks"
+  default_prompt: "Use $agent-kunjani to turn my training brief into a validated Kunjani deck."
+  brand_color: "#DDDC00"
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "kunjani"
+      description: "Create and manage Kunjani decks, outcomes, and activities"
+      transport: "streamable_http"
+      url: "https://play.kunjani.co/api/v1/mcp"
+
+policy:
+  allow_implicit_invocation: true

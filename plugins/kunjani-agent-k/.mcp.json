@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "kunjani": {
+      "type": "http",
+      "url": "https://play.kunjani.co/api/v1/mcp",
+      "oauth_resource": "https://play.kunjani.co/api/v1/mcp"
+    }
+  }
+}

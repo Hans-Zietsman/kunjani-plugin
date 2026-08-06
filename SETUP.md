@@ -1,68 +1,59 @@
-# Connecting the Kunjani MCP server
+# Authorize Agent Kunjani
 
-This plugin ships a reference to the hosted Kunjani MCP server
-(`https://play.kunjani.co/api/v1/mcp`). After installing the plugin you need to
-authenticate to it once. There is nothing to install or run locally; the server
-is hosted by Kunjani.
+The Agent Kunjani plugin already includes the skill and hosted MCP connection. Do not install either component separately.
 
-## Prerequisites
+After installing the plugin, authorize it to access your Kunjani account once.
 
-- A Kunjani account at https://play.kunjani.co with permission to create decks.
-- Either: you sign in through the OAuth browser flow (recommended), **or** you
-  have a personal `knj_` API token from your Kunjani profile.
+## Requirements
 
-## Option A — OAuth (recommended)
+- A Kunjani account at [play.kunjani.co](https://play.kunjani.co)
+- Permission to create or edit decks
 
-The server advertises OAuth 2.1 (Authorization Code + PKCE) via
-`/.well-known/oauth-protected-resource` and
-`/.well-known/oauth-authorization-server`. A compliant MCP client discovers this
-automatically.
+## OAuth sign-in
 
-1. Install and enable this plugin.
-2. The first time Claude tries to use a Kunjani tool, it triggers the OAuth
-   flow: a browser window opens to `play.kunjani.co` asking you to authorize the
-   connector with these scopes: `decks:read`, `decks:write`, `outcomes:write`,
-   `activities:write`.
-3. Approve. The browser hands an authorization code back to your client, which
-   exchanges it for an access token. You are connected.
+1. Install and enable the **Agent Kunjani** plugin.
+2. Ask Agent Kunjani to list your decks or create a training deck.
+3. Your client opens a Kunjani authorization page.
+4. Sign in and approve the requested access.
 
-Access tokens last one hour and refresh automatically; you will not be asked to
-sign in again each session.
+The server uses OAuth 2.1 with Authorization Code and PKCE. Access tokens last one hour and refresh automatically.
 
-## Option B — Personal `knj_` token (manual bearer)
+## Manual token fallback
 
-If your client lets you set a static bearer token for an HTTP MCP server, you can
-paste a Kunjani personal API token instead of using OAuth:
+Use this only if the client cannot complete OAuth and supports static bearer headers.
 
-1. In Kunjani, open your profile and copy your `knj_...` API token.
-2. Configure the `kunjani` server with an Authorization header:
+1. Open your Kunjani profile.
+2. Copy the personal API token beginning with `knj_`.
+3. Add it as the Authorization header for the Kunjani MCP server:
 
-   ```jsonc
-   {
-     "mcpServers": {
-       "kunjani": {
-         "type": "http",
-         "url": "https://play.kunjani.co/api/v1/mcp",
-         "headers": { "Authorization": "Bearer knj_your_token_here" }
-       }
-     }
-   }
-   ```
+```json
+{
+  "mcpServers": {
+    "kunjani": {
+      "type": "http",
+      "url": "https://play.kunjani.co/api/v1/mcp",
+      "headers": {
+        "Authorization": "Bearer knj_your_token_here"
+      }
+    }
+  }
+}
+```
 
-A `knj_` token carries full access to your account, so treat it like a password
-and prefer OAuth where the client supports it.
+A personal API token carries full access to the account. Treat it as a password. Do not paste a real token into a shared file, screenshot, support request, or public repository.
 
 ## Verify the connection
 
-Ask Claude to list your Kunjani decks. It should call `list_decks` and return
-the decks visible to your account. If you get an authorization error, the token
-or OAuth grant did not go through; re-run the flow above.
+Ask:
 
-## Endpoints (reference)
+```text
+Use Agent Kunjani to list my Kunjani decks.
+```
 
-- MCP endpoint: `POST https://play.kunjani.co/api/v1/mcp` (JSON-RPC 2.0,
-  Streamable HTTP transport).
-- Protected-resource metadata:
-  `https://play.kunjani.co/.well-known/oauth-protected-resource`
-- Authorization-server metadata:
-  `https://play.kunjani.co/.well-known/oauth-authorization-server`
+The plugin should call `list_decks` and return the decks visible to the signed-in account. If authorization fails, disable and re-enable the plugin, then repeat the request to restart OAuth.
+
+## Endpoint reference
+
+- MCP endpoint: `https://play.kunjani.co/api/v1/mcp`
+- Protected resource metadata: `https://play.kunjani.co/.well-known/oauth-protected-resource`
+- Authorization server metadata: `https://play.kunjani.co/.well-known/oauth-authorization-server`
