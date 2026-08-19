@@ -113,50 +113,54 @@ When updating an existing deck, call `list_decks` first unless the user supplied
 
 ## The six Suits
 
-### Jolt
+Each Suit has a distinct cognitive job. Match the Suit to the thinking you want, not to variety for its own sake.
 
-Use for quick factual recall with a clear answer.
+### Jolt ⚡
 
-- Common tasks: define, identify, name, list, complete, locate
+Quick factual recall. Short, direct questions with a clear correct answer.
+
+- Prompt patterns: Define the term / Identify types / What is / Who is / Give examples / Complete the statement / When / Where / Which
 - Typical time: 30 to 60 seconds
 
-### Advance
+### Advance 🚀
 
-Use positive reinforcement to unpack why a good action matters.
+Positive reinforcement. Celebrates a good habit, then makes the learner unpack why it matters.
 
-- Start with a reaction specific to the achievement.
-- Ask the learner to explain benefits or positive consequences.
+- Shape: `[emoji + praise] + [positive action] + Unpack the benefits of...`
+- Write the emoji and praise for the **specific achievement** in this activity. Do not use generic openers. For example: 🌟 Top-notch work! You completed all safety checks ahead of schedule / 🎯 Nailed it! You de-escalated a tense customer interaction without needing a manager / 🧠 Smart move! You spotted the allergen risk before the dish left the kitchen. The reaction should feel like it belongs to this particular scenario.
 - Typical time: 60 to 90 seconds
 
-### Mystery
+### Mystery 🧩
 
-Use for creative or lateral thinking that still tests a defined outcome.
+Creative and surprising. Sparks imagination through images, metaphors, storytelling, or lateral thinking.
 
-- Common tasks: interpret an image, solve a riddle, tell a relevant story, use a metaphor, create a response
-- Typical time: 90 to 300 seconds
+- Accepts text, voice, image, or video responses. Set `expected_answer_format` to match.
+- Prompt patterns: Take a photo representing [concept] / Record a short video demo / Draw and share / Use only emojis to describe / Riddle: Who am I? / Tell a true story about...
+- Typical time: 90 to 300 seconds, depending on response format and complexity
 
-### Oops
+### Oops 💣
 
-Present a specific mistake and ask the learner to unpack its consequences or recovery.
+The learner made a mistake. They lose points, reflect on the consequences, and can recover points through a strong reflection.
 
-- Start with a reaction specific to the mistake.
-- Do not supply the consequences inside the prompt.
+- Shape: `[emoji + reaction] + [mistake] + Unpack the negative knock-on consequences`
+- Write the emoji and reaction for the **specific mistake** in this activity. Do not use generic openers. For example: 😱 Yikes! You forgot to check the expiry date before stocking the shelf / 🤦 Really?! You copied the client on an internal email thread about their complaint / 😳 Oh no! You skipped the pre-flight checklist because you were running late. The reaction should make the learner feel the weight of this particular mistake.
+- Do not supply the consequences inside the prompt. The mistake goes in; the fallout is what the learner has to produce.
 - Typical time: 60 to 90 seconds
 
-### Explain
+### Explain 💬
 
-Use for analysis, comparison, summarization, reasoning, or transfer.
+Deeper thinking. Summarizing, analyzing, comparing, connecting ideas.
 
-- Common tasks: explain differences, analyze causes, connect ideas, suggest improvements
+- Prompt patterns: Summarize the main... / Explain the differences between... / Describe the knock-on effects of... / Suggest ways to improve... / How would you apply this?
 - Typical time: 90 to 120 seconds
 
-### Demonstrate
+### Demonstrate 🎮
 
-Use for performance, application, role-play, or production of workplace evidence.
+Applied understanding. Performing a task, role-playing, or producing workplace evidence.
 
-- Valid formats can include text, voice, image, or video when supported by the activity.
-- Common tasks: perform a procedure, record a role-play, photograph a setup, draft a real message, create a step-by-step guide
-- Typical time: 90 to 300 seconds
+- Accepts text, voice, image, or video responses. Set `expected_answer_format` to match.
+- Prompt patterns: Record a demo video / Voice note explaining how to... / Photo of the completed setup / Write the WhatsApp message you would send to a customer / Role-play a conversation / Create a step-by-step guide
+- Typical time: 90 to 300 seconds, depending on response format and complexity
 
 ## Activity quality rules
 
@@ -164,11 +168,27 @@ Use for performance, application, role-play, or production of workplace evidence
 
 - Match the learner's language and reading level.
 - Use short lines and WhatsApp-safe bullets.
-- Use emphasis sparingly.
+- Use Unicode Mathematical Bold (𝐛𝐨𝐥𝐝) for emphasis. WhatsApp markdown is not available, so this is how emphasis survives delivery. Use it sparingly.
 - Test one thing.
 - Avoid answer leakage.
 - State the required response format clearly.
 - Do not refer to a media filename. Refer naturally to the image, audio, or video the learner receives.
+
+### Answer leakage
+
+Before writing any activity, answer two questions internally: what is the one specific thing this tests, and does the prompt give the answer away? If you cannot state the one thing clearly, the activity is not ready. If the answer sits in the prompt, rewrite it.
+
+Bad, because the prompt contains the answer:
+
+> Considering that poor communication can lead to customer churn, reputational damage, and loss of trust, what are some 𝐢𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐤𝐧𝐨𝐜𝐤-𝐨𝐧 𝐜𝐨𝐧𝐬𝐞𝐪𝐮𝐞𝐧𝐜𝐞𝐬 of ignoring a customer complaint?
+
+The learner just rephrases what is already on screen. No recall required.
+
+Good, because the prompt creates a scenario and asks the learner to think:
+
+> 😳 Not a good look! A customer approaches you about a faulty product, and you immediately say "That's not our problem, contact the manufacturer." Unpack the 𝐧𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐤𝐧𝐨𝐜𝐤-𝐨𝐧 𝐜𝐨𝐧𝐬𝐞𝐪𝐮𝐞𝐧𝐜𝐞𝐬 of dismissing the customer like this.
+
+The learner must draw on their own understanding. The scenario supplies context, not answers.
 
 ### Suggested response
 
@@ -193,6 +213,52 @@ Include:
 - What constitutes valid evidence for image, video, or voice responses
 
 Do not write rigid named-tier rubrics. Kunjani maps the grader's numeric score to learner-facing tiers. Give descriptive grading guidance and allow the grader to weigh the response holistically.
+
+## Worked example
+
+One finished activity, shown as the field values the tools take.
+
+**Deck:** Retail Customer Service Excellence
+**Audience:** Store floor staff, Grade 10 English reading level
+**Outcome:** Handle an unhappy customer without unnecessary escalation
+**Suit:** Oops 💣
+
+`text`
+
+```
+😳 Not a good look! A customer approaches you about a faulty product, and you immediately say "That's not our problem, contact the manufacturer."
+
+Unpack the 𝐧𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐤𝐧𝐨𝐜𝐤-𝐨𝐧 𝐜𝐨𝐧𝐬𝐞𝐪𝐮𝐞𝐧𝐜𝐞𝐬 of dismissing the customer like this.
+```
+
+`answer`
+
+```
+• Customer feels 𝐮𝐧𝐯𝐚𝐥𝐮𝐞𝐝 and unheard → less likely to return
+• Damages the store's 𝐫𝐞𝐩𝐮𝐭𝐚𝐭𝐢𝐨𝐧 → negative word-of-mouth or social media complaints
+• Missed chance to 𝐛𝐮𝐢𝐥𝐝 𝐥𝐨𝐲𝐚𝐥𝐭𝐲 → a well-handled complaint can turn an unhappy customer into a loyal one
+• Could lead to 𝐞𝐬𝐜𝐚𝐥𝐚𝐭𝐢𝐨𝐧 → customer demands a manager, creating more disruption
+• Staff member may face 𝐝𝐢𝐬𝐜𝐢𝐩𝐥𝐢𝐧𝐚𝐫𝐲 𝐚𝐜𝐭𝐢𝐨𝐧 if the complaint is reported
+```
+
+`assessment_notes`
+
+```
+𝐆𝐫𝐚𝐝𝐢𝐧𝐠 𝐆𝐮𝐢𝐝𝐚𝐧𝐜𝐞
+• Accept any 3 or more valid negative consequences
+• Answers do not need to match the wording above. Accept synonyms and real-world examples
+• Accept consequences at personal level (disciplinary), store level (reputation), or customer level (lost loyalty)
+• Award higher scores for responses that show a chain of consequences, e.g. bad experience → bad review → lost customers
+
+𝐄𝐱𝐭𝐫𝐚 𝐂𝐨𝐧𝐭𝐞𝐱𝐭
+• This activity assumes basic retail floor experience
+• "Knock-on consequences" means second- and third-order effects, not just the immediate reaction
+```
+
+`time_in_seconds`: `75`
+`outcomes`: `["Handle an unhappy customer without unnecessary escalation"]`
+
+Note the split. The suggested response carries only the core points, because the learner sees it. The tolerances, alternatives, and domain context sit in the assessment notes, which the learner never sees.
 
 ## Media rules
 
