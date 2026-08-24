@@ -126,8 +126,8 @@ Quick factual recall. Short, direct questions with a clear correct answer.
 
 Positive reinforcement. Celebrates a good habit, then makes the learner unpack why it matters.
 
-- Shape: `[emoji + praise] + [positive action] + Unpack the benefits of...`
-- Write the emoji and praise for the **specific achievement** in this activity. Do not use generic openers. For example: 🌟 Top-notch work! You completed all safety checks ahead of schedule / 🎯 Nailed it! You de-escalated a tense customer interaction without needing a manager / 🧠 Smart move! You spotted the allergen risk before the dish left the kitchen. The reaction should feel like it belongs to this particular scenario.
+- Shape: `[emoji + specific praise] + [positive action] + Explain the benefits of...`
+- Write the emoji and praise for the **specific achievement** in this activity. Do not use generic openers. For example: ✅ All checks complete! You finished the safety checks before the deadline / 🎯 Customer calm! You resolved the issue without calling a manager / 🛡️ Risk found! You found the allergen risk before serving the dish. The reaction should feel like it belongs to this particular scenario.
 - Typical time: 60 to 90 seconds
 
 ### Mystery 🧩
@@ -142,8 +142,8 @@ Creative and surprising. Sparks imagination through images, metaphors, storytell
 
 The learner made a mistake. They lose points, reflect on the consequences, and can recover points through a strong reflection.
 
-- Shape: `[emoji + reaction] + [mistake] + Unpack the negative knock-on consequences`
-- Write the emoji and reaction for the **specific mistake** in this activity. Do not use generic openers. For example: 😱 Yikes! You forgot to check the expiry date before stocking the shelf / 🤦 Really?! You copied the client on an internal email thread about their complaint / 😳 Oh no! You skipped the pre-flight checklist because you were running late. The reaction should make the learner feel the weight of this particular mistake.
+- Shape: `[emoji + reaction] + [mistake] + Explain the negative consequences`
+- Write the emoji and reaction for the **specific mistake** in this activity. Do not use generic openers. For example: ⚠️ Expired stock risk! You did not check the expiry date before stocking the shelf / 📧 Customer copied! You included the customer in an internal email about their complaint / ✈️ Safety step missed! You did not complete the pre-flight checklist because you were late. The reaction should make the learner feel the weight of this particular mistake.
 - Do not supply the consequences inside the prompt. The mistake goes in; the fallout is what the learner has to produce.
 - Typical time: 60 to 90 seconds
 
@@ -151,7 +151,7 @@ The learner made a mistake. They lose points, reflect on the consequences, and c
 
 Deeper thinking. Summarizing, analyzing, comparing, connecting ideas.
 
-- Prompt patterns: Summarize the main... / Explain the differences between... / Describe the knock-on effects of... / Suggest ways to improve... / How would you apply this?
+- Prompt patterns: Summarize the main... / Explain the differences between... / Describe the later effects of... / Suggest ways to improve... / How would you apply this?
 - Typical time: 90 to 120 seconds
 
 ### Demonstrate 🎮
@@ -180,13 +180,13 @@ Before writing any activity, answer two questions internally: what is the one sp
 
 Bad, because the prompt contains the answer:
 
-> Considering that poor communication can lead to customer churn, reputational damage, and loss of trust, what are some 𝐢𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐤𝐧𝐨𝐜𝐤-𝐨𝐧 𝐜𝐨𝐧𝐬𝐞𝐪𝐮𝐞𝐧𝐜𝐞𝐬 of ignoring a customer complaint?
+> Poor communication can make customers leave, damage trust, and harm the store. What are the 𝐧𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐜𝐨𝐧𝐬𝐞𝐪𝐮𝐞𝐧𝐜𝐞𝐬 of ignoring a customer complaint?
 
 The learner just rephrases what is already on screen. No recall required.
 
 Good, because the prompt creates a scenario and asks the learner to think:
 
-> 😳 Not a good look! A customer approaches you about a faulty product, and you immediately say "That's not our problem, contact the manufacturer." Unpack the 𝐧𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐤𝐧𝐨𝐜𝐤-𝐨𝐧 𝐜𝐨𝐧𝐬𝐞𝐪𝐮𝐞𝐧𝐜𝐞𝐬 of dismissing the customer like this.
+> 😳 Poor response! A customer approaches you about a faulty product, and you immediately say "That's not our problem. Contact the manufacturer." Explain the 𝐧𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐜𝐨𝐧𝐬𝐞𝐪𝐮𝐞𝐧𝐜𝐞𝐬 of dismissing the customer like this.
 
 The learner must draw on their own understanding. The scenario supplies context, not answers.
 
@@ -226,18 +226,18 @@ One finished activity, shown as the field values the tools take.
 `text`
 
 ```
-😳 Not a good look! A customer approaches you about a faulty product, and you immediately say "That's not our problem, contact the manufacturer."
+😳 Poor response! A customer approaches you about a faulty product, and you immediately say "That's not our problem. Contact the manufacturer."
 
-Unpack the 𝐧𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐤𝐧𝐨𝐜𝐤-𝐨𝐧 𝐜𝐨𝐧𝐬𝐞𝐪𝐮𝐞𝐧𝐜𝐞𝐬 of dismissing the customer like this.
+Explain the 𝐧𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐜𝐨𝐧𝐬𝐞𝐪𝐮𝐞𝐧𝐜𝐞𝐬 of dismissing the customer like this.
 ```
 
 `answer`
 
 ```
-• Customer feels 𝐮𝐧𝐯𝐚𝐥𝐮𝐞𝐝 and unheard → less likely to return
-• Damages the store's 𝐫𝐞𝐩𝐮𝐭𝐚𝐭𝐢𝐨𝐧 → negative word-of-mouth or social media complaints
-• Missed chance to 𝐛𝐮𝐢𝐥𝐝 𝐥𝐨𝐲𝐚𝐥𝐭𝐲 → a well-handled complaint can turn an unhappy customer into a loyal one
-• Could lead to 𝐞𝐬𝐜𝐚𝐥𝐚𝐭𝐢𝐨𝐧 → customer demands a manager, creating more disruption
+• Customer feels 𝐮𝐧𝐯𝐚𝐥𝐮𝐞𝐝 and unheard → they may not return
+• Damages the store's 𝐫𝐞𝐩𝐮𝐭𝐚𝐭𝐢𝐨𝐧 → the customer may post a negative review or tell other people
+• Missed chance to 𝐛𝐮𝐢𝐥𝐝 𝐥𝐨𝐲𝐚𝐥𝐭𝐲 → a helpful response can keep the customer
+• The problem may become more serious → the customer asks to see a manager
 • Staff member may face 𝐝𝐢𝐬𝐜𝐢𝐩𝐥𝐢𝐧𝐚𝐫𝐲 𝐚𝐜𝐭𝐢𝐨𝐧 if the complaint is reported
 ```
 
@@ -252,7 +252,7 @@ Unpack the 𝐧𝐞𝐠𝐚𝐭𝐢𝐯𝐞 𝐤𝐧𝐨𝐜𝐤-𝐨𝐧 𝐜�
 
 𝐄𝐱𝐭𝐫𝐚 𝐂𝐨𝐧𝐭𝐞𝐱𝐭
 • This activity assumes basic retail floor experience
-• "Knock-on consequences" means second- and third-order effects, not just the immediate reaction
+• Consider immediate effects and later effects, not only the customer's first reaction
 ```
 
 `time_in_seconds`: `75`
@@ -276,6 +276,17 @@ Note the split. The suggested response carries only the core points, because the
 - Preserve domain and brand terms when translation would reduce accuracy.
 - If the brief mixes languages and the target language is unclear, ask which language the final deck should use.
 - Keep tool field names in English and translate only field values.
+
+**Plain-language default for learner-facing content.** Unless the user asks for a different level:
+
+- Aim for CEFR B1 in English, or equivalent plain language in any other language.
+- Use STE-inspired plain-language principles, not formal ASD-STE100 compliance.
+- Use short sentences, common words, and direct instructions. Keep one main idea per sentence.
+- Avoid idioms, phrasal expressions, slang, metaphors, wordplay, culture-specific references, and unnecessary jargon. Use them only when the activity must teach or test them.
+- Keep established brand terms and necessary domain terms unchanged.
+- Write for easy understanding and translation. Adapt naturally to each language instead of copying English sentence patterns.
+
+Apply this default to learning outcomes, activity text, suggested responses, deck descriptions, and other copy the learner sees. Keep assessment notes clear and concise, but do not remove technical detail the grader needs.
 
 ## Pre-publish checklist
 
