@@ -7,13 +7,13 @@
   },
   "metadata": {
     "description": "Kunjani plugins for designing and publishing gamified WhatsApp training.",
-    "version": "1.1.1"
+    "version": "1.1.2"
   },
   "plugins": [
     {
       "name": "kunjani-agent-k",
       "description": "Agent Kunjani: instructional-design skill plus the hosted Kunjani MCP server to design and publish gamified WhatsApp training decks.",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "author": {
         "name": "Kunjani",
         "email": "admin@kunjani.co",

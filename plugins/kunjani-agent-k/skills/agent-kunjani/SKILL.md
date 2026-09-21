@@ -132,10 +132,11 @@ Positive reinforcement. Celebrates a good habit, then makes the learner unpack w
 
 ### Mystery 🧩
 
-Creative and surprising. Sparks imagination through images, metaphors, storytelling, or lateral thinking.
+Creative and surprising. The learner shows they understand the concept through a creative vehicle (a song, drawing, story, object, emoji) rather than by doing the task itself.
 
 - Accepts text, voice, image, or video responses. Set `expected_answer_format` to match.
-- Prompt patterns: Take a photo representing [concept] / Record a short video demo / Draw and share / Use only emojis to describe / Riddle: Who am I? / Tell a true story about...
+- Prompt patterns: Reword the lyrics to this song and sing the remix / Draw a picture that illustrates... / Complete the story / Find an object in the room and compare it to... / Create ... out of paper (origami) and share a photo / Give a title to... / Tell a true story about a time... / What is the connection between this picture and...? / Create a diagram or mindmap on... / Draw the effects of... / Create a social media post about... / Find an emoji that best depicts... / Share a string of emojis to... / [Riddle about specific content], who am I? / Write a poem about... / Take a photo of... and add a caption describing...
+- Match the vehicle to the room: songs, dance, and origami for groups that will enjoy them; drawings, object comparisons, titles, captions, social posts, emoji, and riddles are safe anywhere.
 - Typical time: 90 to 300 seconds, depending on response format and complexity
 
 ### Oops 💣
@@ -282,7 +283,7 @@ Note the split. The suggested response carries only the core points, because the
 - Aim for CEFR B1 in English, or equivalent plain language in any other language.
 - Use STE-inspired plain-language principles, not formal ASD-STE100 compliance.
 - Use short sentences, common words, and direct instructions. Keep one main idea per sentence.
-- Avoid idioms, phrasal expressions, slang, metaphors, wordplay, culture-specific references, and unnecessary jargon. Use them only when the activity must teach or test them.
+- Avoid idioms, phrasal expressions, slang, metaphors, wordplay, culture-specific references, and unnecessary jargon. Use them only when the activity must teach or test them. This covers how you word the prompt, not what a Mystery asks the learner to create.
 - Keep established brand terms and necessary domain terms unchanged.
 - Write for easy understanding and translation. Adapt naturally to each language instead of copying English sentence patterns.
 

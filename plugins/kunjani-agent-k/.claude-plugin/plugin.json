@@ -1,6 +1,6 @@
 {
   "name": "kunjani-agent-k",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Agent Kunjani: an instructional-design skill that designs learning outcomes and writes gamified training activities, plus the hosted Kunjani MCP server to publish them straight into a Kunjani deck on the WhatsApp-based learning platform.",
   "author": {
     "name": "Kunjani",
