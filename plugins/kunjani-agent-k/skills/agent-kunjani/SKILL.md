@@ -44,7 +44,7 @@ Establish the minimum information needed to design a useful deck:
 
 Ask focused follow-up questions only for material gaps. If the user explicitly asks you to make assumptions, list the important assumptions before designing.
 
-Default to `loaded` play order because most training is scaffolded. Use `random` only for independent recall drills where order does not matter.
+Default to `loaded` play order because most training is scaffolded. Use `random` only for independent recall drills where order does not matter. A deck where any activity builds on the learner's answer to an earlier activity must be `loaded`, because in a `random` deck the earlier activity may not have been played yet.
 
 ### 2. Propose learning outcomes
 
@@ -212,8 +212,24 @@ Include:
 - Important domain facts the grader needs
 - A transcript or precise description of outgoing prompt media when the grader may not receive that media
 - What constitutes valid evidence for image, video, or voice responses
+- How the activity builds on the learner's own earlier answer, when it does. Name the earlier activity and say how it matters, for example "Must be a different check from the one chosen in E1".
 
 Do not write rigid named-tier rubrics. Kunjani maps the grader's numeric score to learner-facing tiers. Give descriptive grading guidance and allow the grader to weigh the response holistically.
+
+### Retries and earlier answers
+
+A retry is graded on its own by default, so the learner must give the whole answer again. For evidence activities where a retry adds to what was already sent (a second photo, a missing document), put this exact sentence on a line of its own in the notes, as plain text:
+
+`Earlier attempts at this activity count.`
+
+Kunjani matches this line in code. The grader does not interpret it. A leading bullet or list number is fine. Unicode bold, HTML, a heading marker, a checkbox, or extra words on the line stop it matching, and nothing warns you: retries stay standalone.
+
+The grader can see the learner's own earlier answers in the same game. You do not need to copy them into the notes. Author material (story text, media transcripts, facts) still has to be in the notes. Limits:
+
+- Same game only. The grader does not see answers from other games in a tournament, or from teammates.
+- Words only. The grader sees what the learner typed, or the transcript of a voice note. It cannot see an earlier photo or file again, only the feedback given on it at the time. If the next activity depends on what a photo showed, ask the learner to say it in words.
+- Fixed order only. A dependent activity needs a `loaded` deck.
+- No credit from history. The grader uses earlier answers to resolve references ("the check you chose earlier"). It never awards points for something that appears only in the history.
 
 ## Worked example
 
@@ -301,6 +317,7 @@ Confirm all of the following before a publish call:
 - Suggested responses are concise and learner-facing.
 - Assessment notes contain enough flexibility and context for consistent grading.
 - Outgoing media is described in the assessment notes.
+- An activity that builds on an earlier answer names that activity in the assessment notes, and its deck is `loaded`.
 - Existing deck IDs were resolved before updates.
 - The payload passed validation.
 - The user approved the exact write.
